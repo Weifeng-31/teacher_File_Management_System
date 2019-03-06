@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.cqy.entity.UserInfo" table="user_info" schema="admin">
+        <id name="id" column="id"/>
+        <property name="userId" column="user_id"/>
+        <property name="name" column="name"/>
+        <property name="password" column="password"/>
+        <property name="roleId" column="role_id"/>
+        <property name="departId" column="depart_id"/>
+        <property name="born" column="born"/>
+        <property name="phone" column="phone"/>
+        <property name="sex" column="sex"/>
+        <property name="address" column="address"/>
+        <property name="idCard" column="id_card"/>
+        <property name="state" column="state"/>
+        <property name="political" column="political"/>
+        <property name="professionId" column="profession_id"/>
+        <property name="description" column="description"/>
+        <property name="headUrl" column="head_url"/>
+        <property name="lastLoginTime" column="lastLoginTime"/>
+        <property name="qualification" column="qualification"/>
+        <property name="subject" column="subject"/>
+        <property name="age" column="age"/>
+        <property name="province" column="province"/>
+        <property name="notice_state" column="notice_state"/>
+        <property name="nation" column="nation"/>
+        <property name="email" column="email"/>
+    </class>
+</hibernate-mapping>

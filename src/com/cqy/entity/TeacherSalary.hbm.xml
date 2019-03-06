@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.cqy.entity.TeacherSalary" table="teacher_salary" schema="admin">
+        <id name="id" column="id"/>
+        <property name="userId" column="user_id"/>
+        <property name="name" column="name"/>
+        <property name="roleId" column="role_id"/>
+        <property name="departId" column="depart_id"/>
+        <property name="month" column="month"/>
+        <property name="baseSalary" column="baseSalary"/>
+        <property name="bonus" column="bonus"/>
+    </class>
+</hibernate-mapping>

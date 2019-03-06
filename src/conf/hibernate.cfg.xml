@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.useUnicode">true</property>
+        <property name="connection.characterEncoding">UTF-8</property>
+        <property name="hibernate.jdbc.batch_size">50</property>
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+        <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
+        <property name="format_sql">true</property>
+        <property name="hbm2ddl.auto">validate</property>
+        <mapping class="com.cqy.entity.UserInfo"/>
+        <mapping resource="com/cqy/entity/UserInfo.hbm.xml"/>
+        <mapping class="com.cqy.entity.UserDepartment"/>
+        <mapping resource="com/cqy/entity/UserDepartment.hbm.xml"/>
+        <mapping resource="com/cqy/entity/UserMenu.hbm.xml"/>
+        <mapping class="com.cqy.entity.UserMenu"/>
+        <mapping class="com.cqy.entity.UserProfession"/>
+        <mapping resource="com/cqy/entity/UserProfession.hbm.xml"/>
+        <mapping resource="com/cqy/entity/UserRole.hbm.xml"/>
+        <mapping class="com.cqy.entity.UserRole"/>
+        <mapping class="com.cqy.entity.Notice"/>
+        <mapping resource="com/cqy/entity/Notice.hbm.xml"/>
+        <mapping class="com.cqy.entity.TeacherSalary"/>
+        <mapping resource="com/cqy/entity/TeacherSalary.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

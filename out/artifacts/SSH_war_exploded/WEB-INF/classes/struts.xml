@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <constant name="struts.devMode" value="false"/>
+    <constant name="struts.objectFactory" value="spring"/>
+                                        <!--默认的的Action-->
+    <package name="default" namespace="/" extends="struts-default">
+        <!--登录系统-->
+        <action name="loginAction" class="com.cqy.action.LoginAction" method="Login">
+            <result name="error">/404.html</result>
+            <result name="forbid">/forbid.html</result>
+            <result name="systemAdmin">/views/admin/index.jsp</result>
+            <result name="collegeAdmin">/views/collegeAdmin/index.jsp</result>
+            <result name="teacher">/views/teacher/index.jsp</result>
+            <result name="input">/login.jsp</result>
+        </action>
+        <!--退出系统-->
+        <action name="loginOutAction" class="com.cqy.action.LoginAction" method="LoginOut">
+            <result name="success">/login.jsp</result>
+        </action>
+                                            <!--导出表格类 Start-->
+        <!--系统管理员导出全校所有教师信息-->
+        <action name="exportTeacherExcel" class="com.cqy.action.TeacherAction" method="exportTeacher">
+        </action>
+        <!--院系管理员导出本院所有教师信息-->
+        <action name="exportCollegeTeacherExcel" class="com.cqy.action.CollegeTeacherAction" method="exportCollegeTeacher">
+        </action>
+        <!--院系管理员导出本院教师的工资记录-->
+        <action name="exportSalaryExcel" class="com.cqy.action.SalaryAction" method="exportSalary">
+        </action>
+        <!--普通教师导出自己的所有工资记录-->
+        <action name="exportTeacherSalaryExcel" class="com.cqy.action.SalaryAction" method="exportTeacherSalary">
+        </action>
+                                            <!--导出表格类 End-->
+        <!--
+        工具类：修改数据库数据
+        <action name="update" class="com.cqy.util.AddSalaryAction" method="update">
+        </action>
+        -->
+        <!--验证码-->
+        <action name="SecurityCodeImageAction" class="com.cqy.action.SecurityCodeImageAction">
+            <result name="success" type="stream">
+                <param name="contentType">image/jpeg</param>
+                <param name="inputName">imageStream</param>
+                <param name="bufferSize">2048</param>
+            </result>
+        </action>
+    </package>
+
+
+                                            <!--返回json的Action-->
+    <package name="json"  extends="json-default" namespace="/">
+                                        <!--人员管理-->
+        <!-- 获取人员列表-->
+        <action name="queryMemberAction" class="com.cqy.action.TeacherAction" method="queryMember">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--新增人员-->
+        <action name="saveTeacherAction" class="com.cqy.action.TeacherAction" method="saveTeacher">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <result name="input">/404.html</result>
+        </action>
+        <!--删除人员-->
+        <action name="deleteTeacherAction" class="com.cqy.action.TeacherAction" method="deleteTeacher">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--重置密码-->
+        <action name="resetPwdAction" class="com.cqy.action.TeacherAction" method="resetPwd">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--编辑人员-->
+        <action name="editTeacherAction" class="com.cqy.action.TeacherAction" method="editTeacher">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <result name="input">/404.html</result>
+        </action>
+                                           <!-- 获取菜单-->
+        <!-- 获取管理员菜单-->
+        <action name="getAdminMenu" class="com.cqy.action.GetDictActon" method="getAdminMenu">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 获取院系管理员菜单-->
+        <action name="getCollegeAdminMenu" class="com.cqy.action.GetDictActon" method="getCollegeAdminMenu">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 获取教师菜单-->
+        <action name="getTeacherMenu" class="com.cqy.action.GetDictActon" method="getTeacherMenu">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+                                            <!-- 获取字典-->
+        <!-- 获取角色字典-->
+        <action name="getRoleDict" class="com.cqy.action.GetDictActon" method="getRoleDict">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 获取部门字典-->
+        <action name="getDepartDict" class="com.cqy.action.GetDictActon" method="getDepartDict">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 获取职称字典-->
+        <action name="getProfessionDict" class="com.cqy.action.GetDictActon" method="getProfessionDict">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+                                            <!-- 菜单管理-->
+        <!-- 增加菜单-->
+        <action name="addAdminMenuAction" class="com.cqy.action.MenuAction" method="addAdminMenu">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 删除菜单-->
+        <action name="deleteMenuAction" class="com.cqy.action.MenuAction" method="deleteMenu">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 编辑菜单-->
+        <action name="editAdminMenuAction" class="com.cqy.action.MenuAction" method="editAdminMenu">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+                                        <!-- 菜单获取-->
+        <!-- 获取系统管理员菜单-->
+        <action name="queryAdminMenu" class="com.cqy.action.MenuAction" method="queryAdminMenu">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 获取院系管理员菜单-->
+        <action name="queryCollegeAdminMenu" class="com.cqy.action.MenuAction" method="queryCollegeAdminMenu">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 获取普通教师菜单-->
+        <action name="queryTeacherMenu" class="com.cqy.action.MenuAction" method="queryTeacherMenu">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+
+                                            <!-- 学院管理-->
+        <!-- 获取学院列表-->
+        <action name="queryDepartDict" class="com.cqy.action.DepartAction" method="queryDepart">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 增加学院-->
+        <action name="addDepartAction" class="com.cqy.action.DepartAction" method="addDepart">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 删除学院-->
+        <action name="deleteDepartAction" class="com.cqy.action.DepartAction" method="deleteDepart">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 编辑学院-->
+        <action name="editDepartAction" class="com.cqy.action.DepartAction" method="editDepart">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+
+                                            <!-- 角色管理-->
+        <!-- 获取角色列表-->
+        <action name="queryRoleDict" class="com.cqy.action.RoleAction" method="queryRole">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 增加角色-->
+        <action name="addRoleAction" class="com.cqy.action.RoleAction" method="addRole">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 删除角色-->
+        <action name="deleteRoleAction" class="com.cqy.action.RoleAction" method="deleteRole">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 编辑角色-->
+        <action name="editRoleAction" class="com.cqy.action.RoleAction" method="editRole">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+                                            <!-- 公告管理-->
+        <!--获取公告-->
+        <action name="queryNoticeAction" class="com.cqy.action.NoticeAction" method="queryNotice">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--新增公告-->
+        <action name="addNoticeAction" class="com.cqy.action.NoticeAction" method="addNotice">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--编辑公告-->
+        <action name="editNoticeAction" class="com.cqy.action.NoticeAction" method="editNotice">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--删除公告-->
+        <action name="deleteNoticeAction" class="com.cqy.action.NoticeAction" method="deleteNotice">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--更新公告状态-->
+        <action name="updateNoticeAction" class="com.cqy.action.NoticeAction" method="updateNotice">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+                                                <!-- 信息修改管理-->
+        <!--个人资料修改-->
+        <action name="userInfoModifyAction" class="com.cqy.action.UserInfoModifyAction" method="userInfoModify">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--密码修改-->
+        <action name="userPasswordModifyAction" class="com.cqy.action.UserInfoModifyAction" method="userPasswordModify">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+                                                <!-- 院系管理员功能-->
+        <!-- 获取所在院系教师-->
+        <action name="queryCollegeTeacherAction" class="com.cqy.action.CollegeTeacherAction" method="queryCollegeTeacher">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 保存院系教师-->
+        <action name="saveCollegeTeacher" class="com.cqy.action.CollegeTeacherAction" method="saveCollegeTeacher">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 文件上传-->
+        <action name="upLoadImage" class="com.cqy.action.UpLoadAction" method="upLoadImage">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+                                            <!-- 工资管理-->
+        <!--院系管理员查询本院教师工资记录-->
+        <action name="querySalaryAction" class="com.cqy.action.SalaryAction" method="querySalary">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--编辑工资记录-->
+        <action name="editSalaryAction" class="com.cqy.action.SalaryAction" method="editSalary">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--新增工资记录-->
+        <action name="saveSalaryAction" class="com.cqy.action.SalaryAction" method="saveSalary">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--删除工资记录-->
+        <action name="deleteSalaryAction" class="com.cqy.action.SalaryAction" method="deleteSalary">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--新增工资时工号联想与名字自动填充-->
+        <action name="searchAction" class="com.cqy.action.SalaryAction" method="search">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--院系管理员检查是否存在没有工资记录的教师-->
+        <action name="checkSalaryAction" class="com.cqy.action.SalaryAction" method="checkSalary">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!--教师查询自己工资记录-->
+        <action name="queryOwnSalaryAction" class="com.cqy.action.SalaryAction" method="queryOwnSalary">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+
+
+    </package>
+</struts>
