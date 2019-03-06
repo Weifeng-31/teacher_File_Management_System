@@ -1,0 +1,2 @@
+# teacher_File_Management_System
+大学毕业设计作品，教师档案管理系统，基于SSH框架，Mysql数据库和LayUI前端框架
